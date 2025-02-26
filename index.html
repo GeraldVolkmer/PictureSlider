@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Slider mit Steuerleiste</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div id="slider-container">
+    <!-- Bildbereich (Slider) -->
+    <div id="slider-area">
+      <div id="slider">
+        <!-- die Bilder einfügen -->
+        <img src=Bilder/0001_combined.png alt="Wavelength 351 nm">
+        <img src=Bilder/0031_combined.png alt="Wavelength 381 nm">
+        <img src=Bilder/0061_combined.png alt="Wavelength 411 nm">
+        <img src=Bilder/0091_combined.png alt="Wavelength 441 nm">
+        <img src=Bilder/0121_combined.png alt="Wavelength 471 nm">
+        <img src=Bilder/0151_combined.png alt="Wavelength 501 nm">
+        <img src=Bilder/0181_combined.png alt="Wavelength 531 nm">
+        <img src=Bilder/0211_combined.png alt="Wavelength 561 nm">
+        <img src=Bilder/0241_combined.png alt="Wavelength 591 nm">
+        <img src=Bilder/0271_combined.png alt="Wavelength 621 nm">
+        <img src=Bilder/0301_combined.png alt="Wavelength 651 nm">
+        <img src=Bilder/0331_combined.png alt="Wavelength 681 nm">
+        <img src=Bilder/0361_combined.png alt="Wavelength 711 nm">
+        <img src=Bilder/0391_combined.png alt="Wavelength 741 nm">
+        <img src=Bilder/0421_combined.png alt="Wavelength 771 nm">
+        <img src=Bilder/0451_combined.png alt="Wavelength 801 nm">
+        <img src=Bilder/0481_combined.png alt="Wavelength 831 nm">
+        <img src=Bilder/0511_combined.png alt="Wavelength 861 nm">
+        <img src=Bilder/0541_combined.png alt="Wavelength 891 nm">
+        <img src=Bilder/0571_combined.png alt="Wavelength 921 nm">
+        <img src=Bilder/0601_combined.png alt="Wavelength 951 nm">
+        <img src=Bilder/0631_combined.png alt="Wavelength 981 nm">
+        <img src=Bilder/0661_combined.png alt="Wavelength 1011 nm">
+        <img src=Bilder/0691_combined.png alt="Wavelength 1041 nm">
+        <img src=Bilder/0721_combined.png alt="Wavelength 1071 nm">
+        <img src=Bilder/0751_combined.png alt="Wavelength 1101 nm">
+        <img src=Bilder/0781_combined.png alt="Wavelength 1131 nm">
+        <img src=Bilder/0811_combined.png alt="Wavelength 1161 nm">
+        <img src=Bilder/0841_combined.png alt="Wavelength 1191 nm">
+        <img src=Bilder/0871_combined.png alt="Wavelength 1221 nm">
+        <img src=Bilder/0901_combined.png alt="Wavelength 1251 nm">
+        <img src=Bilder/0931_combined.png alt="Wavelength 1281 nm">
+        <img src=Bilder/0961_combined.png alt="Wavelength 1311 nm">
+        <img src=Bilder/1111_combined.png alt="Wavelength 1341 nm">
+        <img src=Bilder/1141_combined.png alt="Wavelength 1371 nm">
+        <img src=Bilder/1171_combined.png alt="Wavelength 1401 nm">
+        <img src=Bilder/1201_combined.png alt="Wavelength 1431 nm">
+        <img src=Bilder/1231_combined.png alt="Wavelength 1461 nm">
+        <img src=Bilder/1261_combined.png alt="Wavelength 1491 nm">
+        <img src=Bilder/1291_combined.png alt="Wavelength 1521 nm">
+        <img src=Bilder/1321_combined.png alt="Wavelength 1551 nm">
+        <img src=Bilder/1351_combined.png alt="Wavelength 1581 nm">
+        <img src=Bilder/1381_combined.png alt="Wavelength 1611 nm">
+        <img src=Bilder/1651_combined.png alt="Wavelength 1641 nm">
+        <img src=Bilder/1681_combined.png alt="Wavelength 1671 nm">
+        <img src=Bilder/1711_combined.png alt="Wavelength 1701 nm">
+        <img src=Bilder/1741_combined.png alt="Wavelength 1731 nm">
+        <img src=Bilder/1771_combined.png alt="Wavelength 1761 nm">
+        <img src=Bilder/1801_combined.png alt="Wavelength 1791 nm">
+        <img src=Bilder/1831_combined.png alt="Wavelength 1821 nm">
+        <img src=Bilder/1861_combined.png alt="Wavelength 1851 nm">
+        <img src=Bilder/1891_combined.png alt="Wavelength 1881 nm">
+        <img src=Bilder/1921_combined.png alt="Wavelength 1911 nm">
+        <img src=Bilder/1951_combined.png alt="Wavelength 1941 nm">
+        <img src=Bilder/1981_combined.png alt="Wavelength 1971 nm">
+        <img src=Bilder/2011_combined.png alt="Wavelength 2001 nm">
+        <img src=Bilder/2041_combined.png alt="Wavelength 2031 nm">
+      </div>
+    </div>
+    <!-- Steuerleiste -->
+    <div id="control-bar">
+      <!-- Play/Pause-Toggle -->
+      <button id="playPauseBtn" title="Start/Pause">
+        <i class="material-icons">pause</i>
+      </button>
+      <!-- Navigation: Zwei Bilder zurück -->
+      <button id="prevTwoBtn" title="Fünf Bilder zurück">
+        <i class="material-icons">fast_rewind</i>
+      </button>
+      <!-- Navigation: Ein Bild zurück -->
+      <button id="prevOneBtn" title="Ein Bild zurück">
+        <i class="material-icons">skip_previous</i>
+      </button>
+      <!-- Navigation: Ein Bild vorwärts -->
+      <button id="nextOneBtn" title="Ein Bild vorwärts">
+        <i class="material-icons">skip_next</i>
+      </button>
+      <!-- Navigation: Zwei Bilder vorwärts -->
+      <button id="nextTwoBtn" title="Fünf Bilder vorwärts">
+        <i class="material-icons">fast_forward</i>
+      </button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
