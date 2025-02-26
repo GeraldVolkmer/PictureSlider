@@ -1,11 +1,11 @@
 // Globale Variablen
-let autoScrolling = true;      // Gibt an, ob der automatische Bildwechsel läuft
+let autoScrolling = true;    // ob der automatische Bildwechsel läuft
 let autoScrollInterval;
-let currentIndex = 0;          // Index des gerade sichtbaren Bildes
-let images = [];               // Array mit den Bildern
+let currentIndex = 0;        // Index des aktuell sichtbaren Bildes
+let images = [];
 
 function updateContainerHeight() {
-  // Bestimme das aktuell sichtbare Bild
+  // Ermitteln wir das aktuell "aktive" Bild
   const currentImg = images[currentIndex];
   if (!currentImg) return;
 
@@ -13,48 +13,43 @@ function updateContainerHeight() {
   const container = document.getElementById("slider-container");
   const controlBar = document.getElementById("control-bar");
   
-  // Falls ein Bild noch nicht ganz geladen ist, kann clientHeight = 0 sein
-  // Du könntest hier auf naturalHeight zurückgreifen oder 
-  // Fall-Back minHeight verwenden
+  // Sicherheitshalber: Falls Bild noch nicht geladen => minHeight
   const minHeight = 300;
   const imageHeight = Math.max(currentImg.clientHeight, minHeight);
 
-  // sliderArea bekommt die Höhe dieses Bildes
+  // #slider-area bekommt die Höhe des aktuellen Bildes
   sliderArea.style.height = imageHeight + "px";
 
-  // Container-Höhe = Bildhöhe + Höhe der Steuerleiste
+  // Gesamthöhe = Bildhöhe + Steuerleiste
   const totalHeight = imageHeight + controlBar.offsetHeight;
   container.style.height = totalHeight + "px";
-  // Optional auch Body-Höhe anpassen
-  document.body.style.height = totalHeight + "px";
+  document.body.style.height = totalHeight + "px"; 
 }
 
-// Zeige das Bild mit dem currentIndex, blende alle anderen aus
+// Blendet nur das Bild mit currentIndex "sichtbar" (active) ein, alle anderen aus
 function showCurrentImage() {
   images.forEach((img, index) => {
-    // Nur das aktuelle Bild anzeigen
     if (index === currentIndex) {
-      img.style.display = "block";
+      img.classList.add("active");
     } else {
-      img.style.display = "none";
+      img.classList.remove("active");
     }
   });
-
-  // Danach Höhe aktualisieren
+  // Höhe anpassen
   updateContainerHeight();
 }
 
-// Wechselt zum nächsten Bild (Zyklus)
+// Wechselt zum nächsten Bild (mit Wrap-Around)
 function nextImage() {
   currentIndex = (currentIndex + 1) % images.length;
   showCurrentImage();
 }
 
-// Starte den automatischen Bildwechsel
+// Startet den automatischen Bildwechsel
 function autoScrollStart() {
   autoScrolling = true;
-  // Z.B. alle 2 Sekunden zum nächsten Bild
-  autoScrollInterval = setInterval(nextImage, 2000);
+  // z.B. alle 2 Sekunden
+  autoScrollInterval = setInterval(nextImage, 2500);
 
   // Buttons deaktivieren
   document.getElementById("prevOneBtn").disabled = true;
@@ -66,7 +61,7 @@ function autoScrollStart() {
   document.getElementById("playPauseBtn").innerHTML = '<i class="material-icons">pause</i>';
 }
 
-// Stoppe den automatischen Bildwechsel
+// Stoppt den automatischen Bildwechsel
 function autoScrollStop() {
   autoScrolling = false;
   clearInterval(autoScrollInterval);
@@ -81,15 +76,17 @@ function autoScrollStop() {
   document.getElementById("playPauseBtn").innerHTML = '<i class="material-icons">play_arrow</i>';
 }
 
-// DOM-Content-Loaded
+// DOMContentLoaded => Initialisieren
 document.addEventListener("DOMContentLoaded", function() {
-  // Lade alle Bilder in ein Array
+  // Alle Bilder sammeln
   images = document.querySelectorAll("#slider img");
-  
+
+  if (images.length === 0) return;
+
   // Zeige zuerst das 0. Bild
   showCurrentImage();
 
-  // Starte Automatik
+  // Starte Automodus
   autoScrollStart();
 
   // Play/Pause-Toggle
@@ -111,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Navigation: Zwei Bilder zurück
   document.getElementById("prevTwoBtn").addEventListener("click", function() {
-    // z.B. zwei Bilder zurück
     currentIndex = Math.max(0, currentIndex - 5);
     showCurrentImage();
   });
@@ -126,11 +122,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Navigation: Zwei Bilder vorwärts
   document.getElementById("nextTwoBtn").addEventListener("click", function() {
-    // z.B. zwei Bilder vorwärts
     currentIndex = Math.min(images.length - 1, currentIndex + 5);
     showCurrentImage();
   });
 
-  // Bei Fenstergrößenänderung => Höhe neu berechnen
+  // Auf Fenstergröße reagieren
   window.addEventListener("resize", updateContainerHeight);
 });
