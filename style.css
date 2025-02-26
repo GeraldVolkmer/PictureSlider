@@ -1,8 +1,30 @@
-/* Grundlegende Formatierung */
+/*****************************************************************************
+ *  Fallback für Browser, die clamp() nicht unterstützen
+ *  (z.B. sehr alte Edge-Versionen oder IE)
+ *****************************************************************************/
+ :root {
+  font-size: 16px;
+}
+
+/*****************************************************************************
+ *  Moderne Browser: Dynamische Schriftgrößen-Skalierung via clamp()
+ *****************************************************************************/
+@supports (font-size: clamp(14px, 5vw, 18px)) {
+  :root {
+    font-size: clamp(14px, 5vw, 18px);
+  }
+}
+
+/*****************************************************************************
+ *  BODY und HTML: 
+ *  - nehmen den gesamten Viewport ein
+ *  - nutzen Flex, um #slider-container zentriert anzuordnen
+ *****************************************************************************/
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -10,7 +32,11 @@ html, body {
   background-color: #000;
 }
 
-/* Slider-Container als Grid (Bildbereich + Steuerleiste) */
+/*****************************************************************************
+ *  #slider-container:
+ *   - max-width: 1440px
+ *   - Layout als Grid (2 Zeilen: Bildbereich oben, Steuerleiste unten)
+ *****************************************************************************/
 #slider-container {
   position: relative;
   width: 100%;
@@ -20,18 +46,29 @@ html, body {
   grid-template-rows: auto auto;
 }
 
-/* Bildbereich */
+/*****************************************************************************
+ *  #slider-area:
+ *   - enthält den Bildbereich
+ *   - Overflow versteckt
+ *   - Höhe per JavaScript
+ *****************************************************************************/
 #slider-area {
   overflow: hidden;
 }
 
-/* Slider: Enthält die Bilder */
+/*****************************************************************************
+ *  #slider:
+ *   - Enthält Bilder (Scroll Snap aktiv), overflow per JS
+ *****************************************************************************/
 #slider {
   scroll-snap-type: y mandatory;
   overflow-y: hidden;
 }
 
-/* Bilder */
+/*****************************************************************************
+ *  Bilder:
+ *   - 100% breite, auto Höhe => responsive
+ *****************************************************************************/
 #slider img {
   width: 100%;
   height: auto;
@@ -39,51 +76,62 @@ html, body {
   scroll-snap-align: start;
 }
 
-/* Steuerleiste */
+/*****************************************************************************
+ *  Steuerleiste (control-bar):
+ *   - liegt unterhalb des Bildbereichs
+ *****************************************************************************/
 #control-bar {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 10px 0;
+  gap: 0.625rem; /* ~10px in rem */
+  padding: 0.625rem 0;
   background-color: #1b1f26;
-  border-top: 1px solid #333;
+  border-top: 0.0625rem solid #333; /* ~1px in rem */
   z-index: 1000;
 }
 
-/* Moderne Button-Stile */
+/*****************************************************************************
+ *  Buttons in der Steuerleiste:
+ *   - rem-basierte Größen => skalieren via clamp()
+ *****************************************************************************/
 #control-bar button {
   background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  border: 0.125rem solid rgba(255, 255, 255, 0.6); /* ~2px in rem */
   color: #fff;
-  font-size: 1.8em;
-  padding: 8px 12px;
-  border-radius: 6px;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem; /* ~6px */
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease,
+              transform 0.1s ease,
+              border-color 0.2s ease;
 }
 
-/* Material Icons im Button skalieren ggf. etwas herab */
+/*****************************************************************************
+ *  Material Icons:
+ *   - ebenfalls in rem => skalieren dynamisch
+ *****************************************************************************/
 #control-bar button .material-icons {
-  font-size: 1.8em;
+  font-size: 1.2rem;
 }
 
-/* Hover-Effekt */
+/*****************************************************************************
+ *  Hover-/Active-/Disabled-Zustände
+ *****************************************************************************/
 #control-bar button:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.8);
 }
 
-/* Active-Effekt */
 #control-bar button:active {
   background-color: rgba(255, 255, 255, 0.2);
   transform: scale(0.95);
   border-color: rgba(255, 255, 255, 1);
 }
 
-/* Deaktivierte Buttons */
 #control-bar button:disabled {
   background-color: #555;
   cursor: not-allowed;
